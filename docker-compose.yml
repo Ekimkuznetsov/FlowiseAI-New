@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  flowise:
+    image: flowiseai/flowise:1.4.3
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - FLOWISE_USERNAME=user
+      - FLOWISE_PASSWORD=password
+      - DATABASE_PATH=/root/.flowise
+      - APIKEY_PATH=/root/.flowise
+      - LOG_PATH=/root/.flowise/logs
+      - EXECUTION_MODE=main
+    volumes:
+      - ~/.flowise:/root/.flowise
+    restart: unless-stopped
+    command: /bin/sh -c "npx flowise start"
